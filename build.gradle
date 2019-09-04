@@ -1,0 +1,16 @@
+plugins {
+//    id 'java'
+//    id 'com.voc.base-gradle-plugin' version '1.0.0-RELEASE'
+}
+
+group 'com.voc'
+version '1..0.0-SNAPSHOT'
+
+
+repositories {
+
+}
+
+dependencies {
+
+}

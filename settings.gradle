@@ -1,0 +1,35 @@
+pluginManagement {
+    repositories {
+        maven { url "D:/Project/mydev/fine-gradle-plugin/build/repos/snapshots" }
+        maven { url "D:/Project/mydev/fine-gradle-plugin/build/repos/releases" }
+        gradlePluginPortal()
+    }
+}
+
+static String sanitizeName(String name) {
+    return name.replaceAll("[ /\\\\:<>\"?*|]", "_")
+}
+
+static def isTaskDir(File dir) {
+    return new File(dir, "build.gradle").exists()
+}
+
+rootProject.projectDir.eachDirRecurse {
+    if (!isTaskDir(it) || it.path.contains(".idea")) {
+        return
+    }
+    def taskRelativePath = rootDir.toPath().relativize(it.toPath())
+    def parts = []
+    for (name in taskRelativePath) {
+        parts.add(sanitizeName(name.toString()))
+    }
+    def moduleName = parts.get(parts.size() - 1)
+//    def moduleName = parts.join("-")
+    include "$moduleName"
+    project(":$moduleName").projectDir = it
+}
+
+
+rootProject.name = 'finesoft'
+
+include(":plugin-annotation-processor")

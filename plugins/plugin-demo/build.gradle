@@ -1,0 +1,34 @@
+plugins {
+    id 'com.voc.base-gradle-plugin' version '1.0.0-RELEASE'
+}
+
+group 'com.voc'
+version '1.0.0-SNAPSHOT'
+
+repositories {
+
+}
+
+dependencies {
+    // TODO: 2019/9/4 10:17 添加依赖
+
+    annotationProcessor project(':plugin-annotation-processor')
+}
+
+//devtool {
+//    /* 本地 Maven 仓库路径 */
+////    localMavenRepository = 'D:\\SoftWare\\Maven\\repository'
+//    /* Google 注解处理器 */
+//    googleAutoService = true
+//    /* 使用 Kotlin，默认 false */
+//    usingKotlin = true
+//    /* 使用 java tools ,默认 false */
+//    javaTools = true
+//}
+
+/* Java 编译选项 */
+tasks.withType(JavaCompile) {
+    /*传递给注解处理器的参数*/
+    options.compilerArgs << "-ApluginVersion=${project.version}"
+    options.compilerArgs << "-ApluginXmlDir=${project.projectDir.absolutePath}"
+}
