@@ -1,5 +1,5 @@
 plugins {
-    id 'com.voc.base' version '0.0.17'
+    id 'com.voc.fine' version '0.0.17'
 }
 
 group 'com.voc'
@@ -13,23 +13,27 @@ dependencies {
     implementation group: 'org.jsoup', name: 'jsoup', version: '1.12.1'
     implementation group: 'commons-io', name: 'commons-io', version: '2.6'
     implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.9'
-//    annotationProcessor project(':plugin-annotation-processor')
+    annotationProcessor project(':plugin-annotation-processor')
 }
 
 devtool {
-//    /* 本地 Maven 仓库路径 */
-////    localMavenRepository = 'D:\\SoftWare\\Maven\\repository'
-//    /* Google 注解处理器 */
-//    googleAutoService = true
-//    /* 使用 Kotlin，默认 false */
     usingKotlin = true
-//    /* 使用 java tools ,默认 false */
-//    javaTools = true
+}
+
+/* 帆软配置 */
+fine {
+    /* 报表版本，默认空 */
+    report = "10.0.2019.08.26"
+    /* 是否 BI 项目，默认 false */
+    bi = false
+    /* 自动注入授权，默认 false */
+    lic = false
 }
 
 /* Java 编译选项 */
 tasks.withType(JavaCompile) {
     /*传递给注解处理器的参数*/
-    options.compilerArgs << "-ApluginVersion=${project.version}"
-    options.compilerArgs << "-ApluginXmlDir=${project.projectDir.absolutePath}"
+    options.compilerArgs << ("-Afine.env.version=${fine.report}" as String)
+    options.compilerArgs << ("-Afine.plugin.version=${project.version}" as String)
+    options.compilerArgs << ("-Afine.plugin.xml.dir=${project.projectDir.absolutePath}" as String)
 }

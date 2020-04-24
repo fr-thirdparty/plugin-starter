@@ -1,0 +1,21 @@
+plugins {
+    id 'com.voc.fine' version '0.0.17'
+}
+
+version = '1.0.0'
+
+dependencies {
+    annotationProcessor project(':plugin-annotation-processor')
+}
+
+fine {
+    report = '10.0.2019.08.26'
+}
+
+/* Java 编译选项 */
+tasks.withType(JavaCompile) {
+    /*传递给注解处理器的参数*/
+    options.compilerArgs << ("-Afine.env.version=${fine.report}" as String)
+    options.compilerArgs << ("-Afine.plugin.version=${project.version}" as String)
+    options.compilerArgs << ("-Afine.plugin.xml.dir=${project.projectDir.absolutePath}" as String)
+}

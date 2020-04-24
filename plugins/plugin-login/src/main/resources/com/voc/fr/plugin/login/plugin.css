@@ -1,0 +1,56 @@
+body {
+    color: #FBFBFB;
+    font-size: 14px;
+}
+
+body input {
+    color: #9ea6b2;
+}
+
+.login-area {
+    min-width: 270px;
+    max-width: 370px;
+}
+
+.login-area .edit-area {
+    background-color: rgba(17, 34, 78, 0.71);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#b511224e, endColorstr=#b511224e);
+    border: 1px solid rgba(131, 194, 255, 0.22);
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    border-radius: 15px;
+}
+
+.login-area .edit-area .dec-login-visual-title {
+    font-size: 18px;
+}
+
+.login-area .edit-area .dec-login-item .bi-border-top.bi-text {
+    border-color: #3d4d66;
+}
+
+
+.dec-login-fresh {
+    background: url('${fineServletURL}/resources?path=com/voc/fr/plugin/login/images/2x/background.png') no-repeat center center;
+    /*_filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='${fineServletURL}/resources?path=com/fr/plugin/login/theme/visual/web/images/2x/background.png');*/
+    background-size: contain;
+    /*_background: none;*/
+}
+
+.dec-login-fresh.hack {
+    background: url('${fineServletURL}/resources?path=com/voc/fr/plugin/login/images/1x/background.png') no-repeat center center;
+    /*_filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='${fineServletURL}/resources?path=com/fr/plugin/login/theme/visual/web/images/1x/background.png');*/
+    /*_background: none;*/
+}
+
+.dec-login-fresh {
+    background-size: cover;
+}
+
+.copyright {
+    color: #c3c3c3;
+    width: 100%;
+    height: 12px;
+    padding: 6px 0;
+    font-size: 13px;
+}
