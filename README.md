@@ -1,6 +1,6 @@
 
     git submodule add <url> plugins/plugin-XXX
-    git submodule add https://github.com/coffee377/fine-plugin-annotation-processor.git plugin-annotation-processor
+    git submodule add https://github.com/fr-thirdparty/fine-plugin-annotation-processor.git
 
 拉取子模块
 
