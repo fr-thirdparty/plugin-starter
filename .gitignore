@@ -17,3 +17,4 @@ gradle-app.setting
 plugins/plugin-*/build
 plugins/plugin-*/logs
 plugins/plugin-*/out
+plugins/plugin-*/plugin.xml

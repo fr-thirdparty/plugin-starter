@@ -1,3 +1,6 @@
+import java.util.function.Predicate
+import java.util.stream.Collectors
+
 pluginManagement {
     repositories {
         /* 本地参考地址 */
@@ -9,30 +12,44 @@ pluginManagement {
     }
 }
 
-static String sanitizeName(String name) {
-    return name.replaceAll("[ /\\\\:<>\"?*|]", "_")
-}
-
-static def isTaskDir(File dir) {
-    return new File(dir, "build.gradle").exists()
-}
-
-rootProject.projectDir.eachDirRecurse {
-    if (!isTaskDir(it) || it.path.contains(".idea")) {
-        return
-    }
-    def taskRelativePath = rootDir.toPath().relativize(it.toPath())
-    def parts = []
-    for (name in taskRelativePath) {
-        parts.add(sanitizeName(name.toString()))
-    }
-    def moduleName = parts.get(parts.size() - 1) as String
-//    def moduleName = parts.join("-")
-    include "$moduleName"
-    project(":$moduleName").projectDir = it
-}
-
-
 rootProject.name = 'finesoft'
 
-include(":plugin-annotation-processor")
+/* 自动引入项目及模块 */
+fileTree(rootDir) {
+    include '**/*.gradle'
+    exclude '**/settings.gradle'
+    exclude '**/buildSrc'
+}.files.stream()
+        .filter(new Predicate<File>() {
+            @Override
+            boolean test(File file) {
+                String relativeName = rootDir.relativePath(file.parentFile)
+                return "" != relativeName
+            }
+        })
+        .collect(Collectors.toList())
+        .each {
+            println(it)
+//          println "${projectPath(it)} => ${projectName(it)} => ${it.parentFile}"
+            include projectPath(it)
+            project(projectPath(it)).projectDir = it.parentFile
+            project(projectPath(it)).name = projectName(it)
+        }
+/**
+ * 项目路径
+ * @param file
+ * @return String
+ */
+String projectPath(File file) {
+    return ":${rootDir.relativePath(file.parentFile).replace("/", ":")}"
+}
+
+/**
+ * 项目名称
+ * @param file
+ * @return String
+ */
+String projectName(File file) {
+    String[] paths = "${rootDir.relativePath(file.parentFile)}".split("/").reverse()
+    return paths[0]
+}
