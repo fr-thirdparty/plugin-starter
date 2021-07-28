@@ -1,3 +1,6 @@
 [submodule "plugin-annotation-processor"]
 	path = plugin-annotation-processor
 	url = https://github.com/fr-thirdparty/fine-plugin-annotation-processor.git
+[submodule "plugins/plugin-select-present"]
+	path = plugins/plugin-select-present
+	url = git@github.com:fr-thirdparty/plugin-select-present.git

@@ -3,7 +3,7 @@ import java.util.stream.Collectors
 
 pluginManagement {
     repositories {
-        /* 本地参考地址 */
+        /* 本地仓库地址 */
         maven { url "D:/SoftWare/Maven/repository" }
         /* 公司仓库地址 */
         maven { url "http://192.168.44.155/nexus/content/groups/public/" }
@@ -12,7 +12,7 @@ pluginManagement {
     }
 }
 
-rootProject.name = 'finesoft'
+rootProject.name = 'plugin-starter'
 
 /* 自动引入项目及模块 */
 fileTree(rootDir) {

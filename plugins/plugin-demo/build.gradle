@@ -14,6 +14,8 @@ dependencies {
     implementation group: 'commons-io', name: 'commons-io', version: '2.6'
     implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.9'
     annotationProcessor project(':plugin-annotation-processor')
+
+
 }
 
 devtool {
@@ -35,5 +37,5 @@ tasks.withType(JavaCompile) {
     /*传递给注解处理器的参数*/
     options.compilerArgs << ("-Afine.env.version=${fine.report}" as String)
     options.compilerArgs << ("-Afine.plugin.version=${project.version}" as String)
-    options.compilerArgs << ("-Afine.plugin.xml.dir=${project.projectDir.absolutePath}" as String)
+    options.compilerArgs << ("-Afine.plugin.xmlDir=${project.projectDir.absolutePath}" as String)
 }
